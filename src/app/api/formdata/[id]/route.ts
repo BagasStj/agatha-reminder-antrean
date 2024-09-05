@@ -6,7 +6,7 @@ const pool = new Pool({
     user: process.env.POSTGRES_USER,
     host: process.env.POSTGRES_HOST,
     database: process.env.POSTGRES_DATABASE,
-    password: process.env.POSTGRES_PASSWORD || '',
+    password: "mZekq7o6jnaQ",
     port: parseInt(process.env.DB_PORT || '5432'),
     ssl: {
         rejectUnauthorized: false
@@ -20,8 +20,8 @@ export async function PUT(request: Request, { params }: { params: { id: string }
         const formData = await request.json();
         const { nama_lengkap, nik, nomor_hp, jadwal_konsultasi, nomor_antrean, waktu_daftar, status } = formData;
 
-        const formattedJadwalKonsultasi = format(parseISO(jadwal_konsultasi), "yyyy-MM-dd'T'HH:mm:ss");
-        const formattedWaktuDaftar = format(parseISO(waktu_daftar), "yyyy-MM-dd'T'HH:mm:ss");
+        const formattedJadwalKonsultasi = format(parseISO(jadwal_konsultasi), "yyyy-MM-dd'T'HH:mm");
+        const formattedWaktuDaftar = format(parseISO(waktu_daftar), "yyyy-MM-dd'T'HH:mm");
 
         const query = `
       UPDATE datanomorantrian 
