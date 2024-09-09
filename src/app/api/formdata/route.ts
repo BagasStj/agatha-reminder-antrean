@@ -2,14 +2,7 @@ import { NextResponse } from 'next/server';
 import { Pool } from 'pg';
 
 const pool = new Pool({
-    user: process.env.POSTGRES_USER,
-    host: process.env.POSTGRES_HOST,
-    database: process.env.POSTGRES_DATABASE,
-    password: "mZekq7o6jnaQ",
-    port: parseInt(process.env.DB_PORT || '5432'),
-    ssl: {
-        rejectUnauthorized: false
-    }
+    connectionString: 'postgres://default:mZekq7o6jnaQ@ep-empty-wind-a17chhot.ap-southeast-1.aws.neon.tech:5432/verceldb?sslmode=require'
 });
 
 export async function POST(request: Request) {

@@ -50,7 +50,7 @@ export default function HomePage() {
         jadwalKonsultasi: '',
         nomorAntrean: '',
         waktuDaftar: '',
-        status: '',
+        status: 'Selesai',
       });
 
       // Redirect ke halaman data
@@ -123,7 +123,7 @@ export default function HomePage() {
 
         {/* Remove waktuDaftar input as it will be set automatically */}
 
-        <label>
+        {/* <label>
           Status
           <select
             name="status"
@@ -136,7 +136,7 @@ export default function HomePage() {
             <option value="Diproses">Diproses</option>
             <option value="Selesai">Selesai</option>
           </select>
-        </label>
+        </label> */}
 
         <button type="submit">Submit</button>
       </form>

@@ -75,7 +75,7 @@ const DataDisplayPage = () => {
               <th>Jadwal Konsultasi</th>
               <th>Nomor Antrean</th>
               <th>Waktu Daftar</th>
-              <th>Status</th>
+              {/* <th>Status</th> */}
               <th>Aksi</th>
             </tr>
           </thead>
@@ -117,7 +117,7 @@ const DataDisplayPage = () => {
                     formatDateTime(data.waktu_daftar)
                   )}
                 </td>
-                <td>
+                {/* <td>
                   {editingId === data.id ? (
                     <select
                       value={editForm.status}
@@ -130,7 +130,7 @@ const DataDisplayPage = () => {
                   ) : (
                     data.status
                   )}
-                </td>
+                </td> */}
                 <td>
                   {editingId === data.id ? (
                     <button onClick={() => handleUpdate(data.id)} className="btn btn-primary">
