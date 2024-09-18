@@ -60,6 +60,7 @@ const DataDisplayPage = () => {
     setEditForm({ ...editForm, [field]: e.target.value });
   };
 
+
   return (
     <div className="data-display-container">
       <h1>Data yang Dimasukkan</h1>
