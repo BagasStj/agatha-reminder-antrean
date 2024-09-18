@@ -27,6 +27,7 @@ const DataDisplayPage = () => {
 
   const formatDateTime = (dateTimeString: string) => {
     const date = new Date(dateTimeString);
+    console.log(date ,  format(date, 'dd-MM-yy HH:mm') + ' WIB');
     return format(date, 'dd-MM-yy HH:mm') + ' WIB';
   };
 
