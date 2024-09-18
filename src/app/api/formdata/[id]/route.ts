@@ -7,7 +7,7 @@ const pool = new Pool({
     host: process.env.POSTGRES_HOST,
     database: process.env.POSTGRES_DATABASE,
     password: process.env.POSTGRES_PASSWORD,
-    port: parseInt(process.env.DB_PORT || '5432'),
+    port: parseInt(process.env.DB_PORT || '45266'),
     ssl: {
         rejectUnauthorized: false
     }
@@ -18,20 +18,21 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     try {
         const id = params.id;
         const formData = await request.json();
-        const { nama_lengkap, nik, nomor_hp, jadwal_konsultasi, nomor_antrean, waktu_daftar, status } = formData;
+        const { nama_lengkap, nik, nomor_hp, tanggallahir, jadwal_konsultasi, nomor_antrean, waktu_daftar } = formData;
 
-        const formattedJadwalKonsultasi = format(parseISO(jadwal_konsultasi), "yyyy-MM-dd'T'HH:mm");
-        const formattedWaktuDaftar = format(parseISO(waktu_daftar), "yyyy-MM-dd'T'HH:mm");
+        const formattedJadwalKonsultasi = format(parseISO(jadwal_konsultasi), "yyyy-MM-dd'T'HH:mm:ss");
+        const formattedWaktuDaftar = format(parseISO(waktu_daftar), "yyyy-MM-dd'T'HH:mm:ss");
+        const formattedTanggalLahir = format(parseISO(tanggallahir), "yyyy-MM-dd");
 
         const query = `
       UPDATE datanomorantrian 
-      SET nama_lengkap = $1, nik = $2, nomor_hp = $3, jadwal_konsultasi = $4, 
-          nomor_antrean = $5, waktu_daftar = $6, status = $7
+      SET nama_lengkap = $1, nik = $2, nomor_hp = $3, tanggallahir = $4,
+          jadwal_konsultasi = $5, nomor_antrean = $6, waktu_daftar = $7
       WHERE id = $8
       RETURNING *
     `;
 
-        const values = [nama_lengkap, nik, nomor_hp, formattedJadwalKonsultasi, nomor_antrean, formattedWaktuDaftar, status, id];
+        const values = [nama_lengkap, nik, nomor_hp, formattedTanggalLahir, formattedJadwalKonsultasi, nomor_antrean, formattedWaktuDaftar, id];
 
         const result = await client.query(query, values);
         

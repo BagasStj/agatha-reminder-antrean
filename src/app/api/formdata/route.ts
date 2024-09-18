@@ -2,22 +2,22 @@ import { NextResponse } from 'next/server';
 import { Pool } from 'pg';
 
 const pool = new Pool({
-    connectionString: 'postgres://default:mZekq7o6jnaQ@ep-empty-wind-a17chhot.ap-southeast-1.aws.neon.tech:5432/verceldb?sslmode=require'
+    connectionString: 'postgresql://postgres:TNWMMiYGBJWmmBTjGfAWZXQhuzguPMDH@autorack.proxy.rlwy.net:45266/railway'
 });
 
 export async function POST(request: Request) {
     const client = await pool.connect();
     try {
         const formData = await request.json();
-        const { namaLengkap, nik, nomorHP, jadwalKonsultasi, nomorAntrean, waktuDaftar, status } = formData;
+        const { namaLengkap, nik, nomorHP, tanggalLahir, jadwalKonsultasi, nomorAntrean, waktuDaftar } = formData;
 
         const query = `
-      INSERT INTO datanomorantrian (nama_lengkap, nik, nomor_hp, jadwal_konsultasi, nomor_antrean, waktu_daftar, status)
+      INSERT INTO datanomorantrian (nama_lengkap, nik, nomor_hp, tanggallahir, jadwal_konsultasi, nomor_antrean, waktu_daftar)
       VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *
     `;
 
-        const values = [namaLengkap, nik, nomorHP, jadwalKonsultasi, nomorAntrean, waktuDaftar, status];
+        const values = [namaLengkap, nik, nomorHP, tanggalLahir, jadwalKonsultasi, nomorAntrean, waktuDaftar];
 
         const result = await client.query(query, values);
         return NextResponse.json(result.rows[0], { status: 201 });
