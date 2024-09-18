@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
+import { toZonedTime } from 'date-fns-tz';
 
 const DataDisplayPage = () => {
   const [savedData, setSavedData] = useState([]);
@@ -26,7 +27,7 @@ const DataDisplayPage = () => {
   };
 
   const formatDateTime = (dateTimeString: string) => {
-    const date = new Date(dateTimeString);
+    const date = toZonedTime(new Date(dateTimeString), 'Asia/Jakarta');
     console.log(dateTimeString ,  format(date, 'dd-MM-yy HH:mm') + ' WIB');
     return format(date, 'dd-MM-yy HH:mm') + ' WIB';
   };
